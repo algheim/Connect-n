@@ -1,15 +1,18 @@
 import pygame as p
 from buttons import Button
 from square import Square
+from checkwinner import check_winner
 
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 
+
 class Game:
-    def __init__(self, players, board_length, board_height, gravity, win):
+    def __init__(self, players, board_length, board_height, goal, gravity, win):
         self.players = players
         self.board_length = board_length
         self.board_height = board_height
+        self.goal = goal
         self.gravity = gravity
         self.win = win
         self.win_size = win.get_size()
@@ -53,6 +56,11 @@ class Game:
         self.turn += 1
         if self.turn == len(self.players):
             self.turn = 0
+
+    def check_winner(self):
+        winner = check_winner(self.game_board, self.goal)
+        if winner != None:
+            print(winner)
 
     def draw(self):
         self.win.fill(BLACK)
