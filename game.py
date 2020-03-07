@@ -49,7 +49,8 @@ class Game:
                 self.event = event
 
     def update_game_board(self):
-        done = self.players[self.turn].make_move(self.game_board, self.event)
+        done = self.players[self.turn].make_move(self.game_board,
+        self.event, self.gravity)
         if done:
             self.change_turn()
 

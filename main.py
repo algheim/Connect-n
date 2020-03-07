@@ -4,12 +4,13 @@ from player import Player
 
 RED = (255, 0 ,0)
 GREEN = (0, 255, 0)
+BLUE = (0, 0, 255)
 
 SCREEN_LENGTH = 500
 SCREEN_HEIGHT = 700
 win = p.display.set_mode((SCREEN_LENGTH, SCREEN_HEIGHT))
-players = [Player("user", RED), Player("user", GREEN)]
-game = Game(players, 3, 4, 3, False, win)
+players = [Player("user", RED), Player("user", GREEN), Player("user", BLUE)]
+game = Game(players, 3, 4, 3, True, win)
 
 while True:
     game.update_event()
