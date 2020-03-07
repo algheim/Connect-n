@@ -23,6 +23,7 @@ class Game:
         self.game_board = self.get_game_board()
         self.event = None
         self.turn = 0
+        self.winner = None
 
     def get_game_board(self):
         game_board = []
@@ -58,9 +59,16 @@ class Game:
             self.turn = 0
 
     def check_winner(self):
-        winner = check_winner(self.game_board, self.goal)
-        if winner != None:
-            print(winner)
+        self.winner = check_winner(self.game_board, self.goal)
+
+    def end_game(self):
+        if self.winner is None:
+            return
+
+        self.event = None
+        while self.event is None:
+            self.update_event()
+        quit()
 
     def draw(self):
         self.win.fill(BLACK)

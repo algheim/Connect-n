@@ -15,5 +15,5 @@ while True:
     game.update_event()
     game.update_game_board()
     game.check_winner()
-
     game.draw()
+    game.end_game()
