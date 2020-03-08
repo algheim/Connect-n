@@ -61,14 +61,25 @@ def check_diag2(game_board, goal):
             if winner:
                 return game_board[y][x].value
 
+def check_tie(game_board):
+    tie = True
+    for row in game_board:
+        for square in row:
+            if square.value == None:
+                tie = False
+
+    return tie
+
 
 def check_winner(game_board, goal):
     if check_horizontal(game_board, goal) is not None:
-        return check_horizontal
+        return check_horizontal(game_board, goal)
     if check_vertical(game_board, goal) is not None:
-        return check_vertical
+        return check_vertical(game_board, goal)
     if check_diag1(game_board, goal) is not None:
-        return check_diag1
+        return check_diag1(game_board, goal)
     if check_diag2(game_board, goal) is not None:
-        return check_diag2
+        return check_diag2(game_board, goal)
+    if check_tie(game_board):
+        return "tie"
     return None

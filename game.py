@@ -2,6 +2,8 @@ import pygame as p
 from buttons import Button
 from square import Square
 from checkwinner import check_winner
+from ai import Ai
+
 
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
@@ -24,6 +26,7 @@ class Game:
         self.event = None
         self.turn = 0
         self.winner = None
+        self.ai = Ai(self.game_board, gravity, goal, players, 20)
 
     def get_game_board(self):
         game_board = []
@@ -50,7 +53,7 @@ class Game:
 
     def update_game_board(self):
         done = self.players[self.turn].make_move(self.game_board,
-        self.event, self.gravity)
+        self.event, self.gravity, self.ai)
         if done:
             self.change_turn()
 
@@ -66,6 +69,7 @@ class Game:
         if self.winner is None:
             return
 
+        print(self.winner)
         self.event = None
         while self.event is None:
             self.update_event()

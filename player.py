@@ -8,12 +8,20 @@ class Player:
         if highlight_color is None:
             self.highlight_color = color
 
-    def make_move(self, game_board, event, gravity):
+    def make_move(self, game_board, event, gravity, ai):
         if self.type == "user":
             done = self.get_user_move(game_board, event, gravity)
         if self.type == "ai":
-            done = True
+            done = self.get_ai_move(ai, game_board, gravity)
         return done
+
+    def get_ai_move(self, ai, game_board, gravity):
+        move = ai.get_best_move(self)
+        game_board[move[1]][move[0]].value = self.color
+        game_board[move[1]][move[0]].button.main_color = self.color
+        game_board[move[1]][move[0]].button.highlight_color = self.highlight_color
+        game_board[move[1]][move[0]].active = False
+        return True
 
     def get_user_move(self, game_board, event, gravity):
         if event is None:
