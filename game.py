@@ -1,7 +1,7 @@
 import pygame as p
 from buttons import Button
 from square import Square
-from checkwinner import check_winner
+from score import check_winner
 from ai import Ai
 
 

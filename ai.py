@@ -1,4 +1,4 @@
-from checkwinner import check_winner
+from score import check_winner
 from score import get_score
 
 
@@ -39,7 +39,7 @@ class Ai:
         return best_move
 
     def two_player_min_max(self, player, depth):
-        score = get_score(self.game_board, player, self.goal)
+        score = get_score(self.game_board, player, self.players, self.goal)
         if score == 10000 or score == -10000 or score == 0 or depth == 0:
             return score
 
