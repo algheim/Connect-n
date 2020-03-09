@@ -1,6 +1,6 @@
 from score import check_winner
 from score import get_score
-
+import pygame as p
 
 class Ai:
     def __init__(self, game_board, gravity, goal, players, depth):
@@ -10,6 +10,17 @@ class Ai:
         self.players = players
         self.depth = depth
         self.player = None
+        self.event = None
+
+    def update_event(self):
+        self.event = None
+        for event in p.event.get():
+            if event.type == p.QUIT:
+                p.quit()
+                quit()
+
+            if event.type == p.MOUSEBUTTONDOWN:
+                self.event = event
 
     def get_possible_moves(self):
         possible_moves = []
@@ -36,9 +47,13 @@ class Ai:
                 best_score = score
                 best_move = move
 
+        if best_score == -10000:
+            best_move = move
+
         return best_move
 
     def two_player_min_max(self, player, depth):
+        self.update_event()
         score = get_score(self.game_board, player, self.players, self.goal)
         if score == 10000 or score == -10000 or score == 0 or depth == 0:
             return score
@@ -66,4 +81,5 @@ class Ai:
 
         if index + 1 == len(self.players):
             return self.players[0]
+
         return self.players[index + 1]

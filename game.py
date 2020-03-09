@@ -1,7 +1,7 @@
 import pygame as p
 from buttons import Button
 from square import Square
-from score import check_winner
+from checkwinner import check_winner
 from ai import Ai
 
 
@@ -10,7 +10,7 @@ WHITE = (255, 255, 255)
 
 
 class Game:
-    def __init__(self, players, board_length, board_height, goal, gravity, win):
+    def __init__(self, players, board_length, board_height, goal, gravity, depth, win):
         self.players = players
         self.board_length = board_length
         self.board_height = board_height
@@ -26,7 +26,7 @@ class Game:
         self.event = None
         self.turn = 0
         self.winner = None
-        self.ai = Ai(self.game_board, gravity, goal, players, 20)
+        self.ai = Ai(self.game_board, gravity, goal, players, depth)
 
     def get_game_board(self):
         game_board = []
